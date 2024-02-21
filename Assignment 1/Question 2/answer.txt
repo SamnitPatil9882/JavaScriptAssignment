@@ -1,0 +1,10 @@
+1.In the head tag:
+    Code return inside head tag is loaded first and it unable to find innerhtml for id "test"
+    It shows error :
+     Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
+
+2.at the start of body tag:
+    It shows same error first script loaded but unable to find innerHTML for id "test"
+
+3.at the end of body tag:
+    It changes the innerHTML of id "test" into "Goodbye world"
