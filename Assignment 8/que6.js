@@ -3,35 +3,39 @@
 
 // */
 
-// const func = async ()=>{
-//     let apiPromise = new Promise(function(resolve,reject){
+const func = async ()=>{
+    let apiPromise = new Promise(function(resolve,reject){
     
-//         fetch('https://reqres.in/api/users')
-//         .then(response => {
-//           if (!response.ok) {
-//             throw new Error('Failed to fetch data');
-//           }
-//           return response.json();
-//         })
-//         .then(data => {
-//           resolve(data);
-//         })
-//         .catch(error => {
-//           reject(error);
-//         });
-//     })
-//     await apiPromise.then(
-//         function(value){
-//             console.log("Data is fetched and will be printed after 2 sec: ");
-//             setTimeout(()=>(console.log(value)),2000);
-//         },
-//         function(error){
-//             console.log(error);
-//         }
-//     )
+        fetch('https://reqres.in/api/users')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          return response.json();
+        })
+        .then(data => {
+            console.log("Data has been received")
+            console.log("Wait for 2 sec.");
+          setTimeout(() => {
+            resolve(data)
+          }, 2000);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    })
+    await apiPromise.then(
+        function(value){
+            console.log("Data : ");
+            console.log(value);
+        },
+        function(error){
+            console.log(error);
+        }
+    )
     
-// }
-// func();
+}
+func();
 
 
-const promise = new Promise((res, rej) => rej()).then(res => console.log("RESOLVED")).catch(err => console.log("REJECTED")); promise.then(res => console.log("RESOLVED AGAIN")).catch(err => console.log("REJECTED AGAIN"));
+
