@@ -6,36 +6,26 @@
 // }
 // console.log(res)
 
-function mergeById(userNames, userEmails){
-    let mp ={};
-    for (const obj of userNames){
-        if(!mp[obj.id]){
-            mp[obj.id]=1;
-        }else{
-            mp[obj.id]++;
+function mergeById(userNames, userEmails) {
+    const map = {};
+    
+    // First, map userNames by id
+    for (const user of userNames) {
+        map[user.id] = { ...user };
+    }
+    
+    // Then, merge userEmails into the map
+    for (const user of userEmails) {
+        if (map[user.id]) {
+            map[user.id] = { ...map[user.id], ...user };
         }
     }
-    for (const obj of userEmails){
-        if(!mp[obj.id]){
-            mp[obj.id]=1;
-        }else{
-            mp[obj.id]++;
-        }
-    }
-    const objArray ={};
-    for (const obj of userEmails){
-        if(mp[obj.id]%2==0){
-            objArray[obj.id]=obj;
-        }
-    }
-    for (const obj of userNames){
-        if(mp[obj.id]%2 == 0){
-            objArray[obj.id]=Object.assign(obj,objArray[obj.id]);
-        }
-    }
-    return Object.values(objArray)
-}
 
+    // Filter out objects without both first_name and email
+    const result = Object.values(map).filter(user => user.first_name && user.email);
+
+    return result;
+}
 let userNames = [{
 "id": 1,
 "first_name": "Nicki",

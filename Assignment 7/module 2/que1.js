@@ -1,10 +1,8 @@
 function mapBy(arr,property){
-    let result = {};
-
-    for(let i in arr){
-        result[arr[i][property]]=arr[i];
-    }
-    return result;
+    return arr.reduce((result, obj) => {
+        result[obj[property]] = obj;
+        return result;
+    }, {});
 }
 
 let users = [{
